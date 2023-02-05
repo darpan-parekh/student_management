@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="student_custom_tree_view" model="ir.ui.view">
+        <field name="name">custom.student.tree</field>
+        <field name="model">custom.student</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="roll_no"/>
+                <field name="qualification"/>
+                <field name="dob"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="student_custom_form_view" model="ir.ui.view">
+        <field name="name">custom.student.form</field>
+        <field name="model">custom.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button string="Print" type="object" name="print_excel_report" class="btn-primary"/>
+                    <button name="send_student_mail" type="object" string="Send mail" class="btn-primary"/>
+                </header>
+                <sheet>
+                    <group name="student_details">
+                        <field name="name"/>
+                        <field name="roll_no"/>
+                        <field name="qualification"/>
+                        <field name="dob"/>
+                        <field name="total_exp"/>
+                        <field name="Emp_state" widget="radio"/>
+                    </group>
+                    <notebook>
+                        <page name="details" string="Details">
+                            <label for="sale_order_details" string="Sale Order Details"/>
+                            <field name="sale_order_details">
+                                <tree editable="bottom">
+                                    <field name="order_select"/>
+                                    <field name="user_id"/>
+                                    <field name="payment_term_id"/>
+                                    <field name="company_id" invisible='1'/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="options" string="Order Options">
+                            <group>
+                                <field name="sale_order_ids"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="student_template_kanban_view" model="ir.ui.view">
+        <field name="name">student.template.kanban.view</field>
+        <field name="model">custom.student</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <h4>
+                                <field name="name"/>
+                            </h4>
+                            <field name="roll_no"/>
+                            <field name="qualification"/>
+                            <field name="dob"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="student_template_gantt_view" model="ir.ui.view">
+        <field name="name">student.template.gantt.view</field>
+        <field name="model">custom.student</field>
+        <field name="arch" type="xml">
+            <gantt date_start="dob" string="Gantt chart">
+                <level>
+                    <field name="name"/>
+                    <field name="roll_no"/>
+                    <field name="dob"/>
+                </level>
+                <templates>
+                    <div t-name="gantt-popover" class="container-fluid">
+                        <div class="row no-gutters">
+                            <div class="col">
+                                <ul class="pl-1 mb-0 list-unstyled">
+                                    <li>
+                                        <strong>Start Date:</strong>
+                                        <t t-esc="userTimezoneStartDate.format('YYYY-MM-DD HH:mm:ss')"/>
+                                    </li>
+                                    <li>
+                                        <strong>Stop Date:</strong>
+                                        <t t-esc="userTimezoneStopDate.format('YYYY-MM-DD HH:mm:ss')"/>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <field name="name"/>
+                            </div>
+                        </div>
+                        <div>
+                            <field name="roll_no"/>
+                        </div>
+                    </div>
+                </templates>
+            </gantt>
+        </field>
+    </record>
+
+    <record id="student_template_calendar_view" model="ir.ui.view">
+        <field name="name">student.template.calendar.view</field>
+        <field name="model">custom.student</field>
+        <field name="arch" type="xml">
+            <calendar date_start="dob" mode="week">
+                <field name="name"/>
+                <field name="roll_no"/>
+                <field name="qualification"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="student_template_graph_view" model="ir.ui.view">
+        <field name="name">student.template.graph.view</field>
+        <field name="model">custom.student</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="name"/>
+                <field name="roll_no" type="measure"/>
+                <field name="qualification"/>
+                <field name="dob"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- action view-->
+    <record id="student_template_action" model="ir.actions.act_window">
+        <field name="context">{}</field>
+        <field name="name">Student Management</field>
+        <field name="res_model">custom.student</field>
+        <field name="view_mode">tree,kanban,calendar,graph,gantt,form</field>
+    </record>
+
+    <record id="student_template_action_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="student_custom_tree_view"/>
+        <field name="act_window_id" ref="student_template_action"/>
+    </record>
+
+    <record id="student_template_action_kanban" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="student_template_kanban_view"/>
+        <field name="act_window_id" ref="student_template_action"/>
+    </record>
+
+    <record id="student_template_action_graph" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="student_template_graph_view"/>
+        <field name="act_window_id" ref="student_template_action"/>
+    </record>
+
+    <record id="student_template_action_kanban" model="ir.actions.act_window.view">
+        <field name="sequence" eval="4"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="student_template_calendar_view"/>
+        <field name="act_window_id" ref="student_template_action"/>
+    </record>
+
+    <record id="student_template_action_gantt" model="ir.actions.act_window.view">
+        <field name="sequence" eval="5"/>
+        <field name="view_mode">gantt</field>
+        <field name="view_id" ref="student_template_gantt_view"/>
+        <field name="act_window_id" ref="student_template_action"/>
+    </record>
+    <menuitem id="student_menu_root"
+              name="Student Management"
+              sequence="7"/>
+    <!-- Sub menu item in nav bar -->
+    <menuitem id="Student_sub_menu"
+              name="Student Management"
+              parent="student_menu_root"
+              action="student_management.student_template_action"
+              sequence="2"/>
+
+    <!-- Sub menu item in nav bar -->
+    <menuitem id="sub_sub_menu"
+              name="Student Details"
+              parent="Student_sub_menu"
+              action="student_management.student_template_action"
+              sequence="2"/>
+
+</odoo>

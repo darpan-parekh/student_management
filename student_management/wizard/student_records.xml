@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="student_records_view">
+        <field name="name">student.records.view</field>
+        <field name="model">student.excel.record</field>
+        <field name="arch" type="xml">
+            <form string="Excel Report Generator">
+                <label for="file_name" string="File Name"/>
+                <field name="file_name" readonly="1"/>
+                <br/>
+                <label for="data" string="Report File"/>
+                <field name="data" filename='file_name' download='name' readonly='1'/>
+                <footer>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

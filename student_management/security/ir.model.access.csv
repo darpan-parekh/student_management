@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_student_managent,custom_student,model_custom_student,,1,1,1,1
+access_student_record,access_student_record,model_student_excel_record,,1,1,1,1
+access_student_records,access_student_records,model_student_records,base.group_user,1,1,1,0

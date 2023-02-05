@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mail_student_record" model="mail.template">
+        <field name="name">Student Report Card</field>
+        <field name="model_id" ref="model_student_records"/>
+        <field name="subject">${object.name} Report Card</field>
+        <field name="email_from">darpanparekh.acespritech@gmail.com</field>
+        <field name="email_to">'darpanparekh68@gmail.com'</field>
+        <field name="body_html" type="xml">
+            <div>
+                <b>
+                    Dear ${object.name}, Tommorow is your test.
+                </b>
+                <br/>
+                <br/>
+                your roll no is , ${object.roll_no} for test.
+                <br/>
+                <i>test have 50 questions 2 marks each.</i>
+                <br/>
+                Hello i am Darpan.
+                <p>this is paragraph tag.
+                    this is the general information for student.
+                </p>
+            </div>
+        </field>
+    </record>
+
+<!--    <record id="mail_records" model="mail.template">-->
+<!--        <field name="name">Student Reports Card</field>-->
+<!--        <field name="model_id" ref="student_management.model_student_records"/>-->
+<!--        <field name="subject">Report Card</field>-->
+<!--        <field name="email_from">darpanparekh.acespritech@gmail.com</field>-->
+<!--        <field name="email_to">'darpanparekh68@gmail.com'</field>-->
+<!--        <field name="body_html" type="xml">-->
+<!--            Hello i am Darpan.-->
+<!--            <p>this is paragraph tag.-->
+<!--                this is the general information for student-->
+<!--            </p>-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+</odoo>

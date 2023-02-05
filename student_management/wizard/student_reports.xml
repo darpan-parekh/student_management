@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="student_records_print">
+        <field name="name">student.records.print</field>
+        <field name="model">student.records</field>
+        <field name="arch" type="xml">
+            <form string="Student Reports">
+                <label for="report_type" string="Report Type"/>
+                <field name="report_type" widget="radio"/>
+                <footer>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    <button name='print_report' type='object' string="Print" class="oe_highlight"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

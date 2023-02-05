@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_student">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="student_management.student_report_card"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="student_report_card">
+       <t t-call="web.external_layout">
+            <t t-foreach="doc" t-as="o">
+                    <div class="page">
+                        <span t-esc="o"/>
+                        <div class="oe_structure"/>
+                        <p>
+                            hello dp..!!
+
+                            <label for="o.name" string="Name : "/>
+                            <span t-field="o.name"/>
+                        </p>
+                        <p>Sale Order Status</p>
+                        <table class="table table-sm o_main_table">
+                            <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                            <thead style="display: table-row-group">
+                                <tr>
+                                    <th name="th_order status" class="text-left">Order Status</th>
+                                    <th name="th_seller" class="text-left">Sells Person</th>
+                                </tr>
+                            </thead>
+                            <tbody class="student_tbody">
+                                <t t-foreach="o.sale_order_details" t-as="line">
+                                    <tr>
+                                        <td name="td_name">
+                                            <span t-field="line.order_select"/>
+                                        </td>
+                                        <td name="td_roll">
+                                            <span t-field="line.user_id"/>
+                                        </td>
+                                    </tr>
+                                </t>
+
+                            </tbody>
+                        </table>
+                        <p>Multi Sale Orders</p>
+                        <table class="table table-sm o_main_table">
+                            <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                            <thead style="display: table-row-group">
+                                <tr>
+                                    <th name="th_order_name" class="text-left">Order Name</th>
+                                    <th name="th_customer" class="text-left">Customer</th>
+                                    <th name="th_total" class="text-left">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody class="student_tbody">
+                                <t t-foreach="o.sale_order_ids" t-as="line">
+                                    <tr>
+                                        <td name="td_name">
+                                            <span t-field="line.name"/>
+                                        </td>
+                                        <td name="td_roll">
+                                            <span t-field="line.partner_id"/>
+                                        </td>
+                                        <td name="td_roll">
+                                            <span t-field="line.amount_total"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                                <t t-foreach="o.sale_order_ids" t-as="line">
+                                    <tr class="is-subtotal text-right">
+                                        <td name="td_section_subtotal" colspan="99">
+                                            <strong class="mr16">Subtotal</strong>
+                                            <span
+                                                    t-esc="current_subtotal"
+                                                    t-options='{"widget": "number", "display_currency": line.amount_total}'
+                                            />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+
+    </template>
+
+
+</odoo>
+
+<!--                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>-->

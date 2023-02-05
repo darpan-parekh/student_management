@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="model_student_action_report" model="ir.actions.server">
+        <field name="name">Excel Report</field>
+        <field name="model_id" ref="student_management.model_student_excel_record"/>
+        <field name="binding_model_id" ref="student_management.model_custom_student"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">action = model.print_excel_report()</field>
+    </record>
+
+    <record id="student_action_reports" model="ir.actions.server">
+        <field name="name">Reports</field>
+        <field name="model_id" ref="student_management.model_student_records"/>
+        <field name="binding_model_id" ref="student_management.model_custom_student"/>
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">action = model.print_records()</field>
+    </record>
+
+</odoo>
